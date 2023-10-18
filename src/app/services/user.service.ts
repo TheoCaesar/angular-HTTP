@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from '../interfaces/user';
 import { environment } from 'src/environments/environment.development';
+import { HttpEvent } from '@angular/common/http';
 
 HttpClient
 @Injectable({
@@ -13,11 +14,13 @@ export class UserService {
   readonly paramValues = [5,10];
   constructor(private varHttp:HttpClient) { }
 
-  getUsers():Observable<User[]> {
-    // let myParams = new HttpParams().set('page', '5').set('size','10');
-    const theParams = {["size"]:this.paramValues};
-    let myParams = new HttpParams({fromObject:theParams});
-    return this.varHttp.get<User[]>(environment.varApiURL, {params:myParams})
+  // getUsers():Observable<User[]> {
+  //   return this.varHttp.get<User[]>(environment.varApiURL)
+  // }
+
+  getUsers():Observable<HttpEvent<User[]>> {
+    return this.varHttp.get<User[]>(environment.varApiURL,
+      {observe:'events', reportProgress:true})
   }
 
   getUserObj(paramID:number):Observable<User> {
