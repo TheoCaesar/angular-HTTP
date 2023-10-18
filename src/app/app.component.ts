@@ -35,13 +35,24 @@ export class AppComponent implements OnInit {
   constructor(private varUserService:UserService){}
 
   ngOnInit(): void {
+    this.onGetText();
     // this.onDelete(3);
     // this.onUpdateUserField()
     // this.onUpdateUserObj()
-    this.onGetUsers()
+    // this.onGetUsers()
     // this.onGetUserObj()
     // this.onCreateUserObj()
   }
+
+  //get text method
+  onGetText(){
+    this.varUserService.getTxtFile().subscribe({
+      next(var_response){console.log(var_response)},
+      error(var_error) {console.log("error",var_error)},
+      complete() {console.log("Fetched Text File")}
+    })
+  }
+
   //delete method
   onDelete(userID:number){
     this.varUserService.deleteUserObj(userID).subscribe({

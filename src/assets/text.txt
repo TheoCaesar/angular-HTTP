@@ -1,0 +1,8 @@
+Reading the full response
+In the previous example, the call to HttpClient.get() did not specify any options.
+By default, it returned the JSON data contained in the response body.
+
+You might need more information about the transaction than is contained in the response body.
+Sometimes servers return special headers or status codes to indicate certain conditions that are important to the application workflow.
+
+Tell HttpClient that you want the full response with the observe option of the get() method:

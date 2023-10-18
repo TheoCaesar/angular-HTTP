@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from '../interfaces/user';
 import { environment } from 'src/environments/environment.development';
@@ -14,9 +14,11 @@ export class UserService {
   readonly paramValues = [5,10];
   constructor(private varHttp:HttpClient) { }
 
-  // getUsers():Observable<User[]> {
-  //   return this.varHttp.get<User[]>(environment.varApiURL)
-  // }
+  // getTxtFile():Observable<string> {
+  getTxtFile() {
+    // return this.varHttp.get(`assets/text.txt`, {responseType:'text'})
+    return this.varHttp.get(`assets/text.txt`, {responseType:'blob', observe:'response'})
+  }
 
   getUsers():Observable<HttpEvent<User[]>> {
     return this.varHttp.get<User[]>(environment.varApiURL,
