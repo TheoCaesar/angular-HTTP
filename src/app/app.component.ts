@@ -9,6 +9,8 @@ import { User } from './interfaces/user';
 })
 export class AppComponent implements OnInit {
   title = 'angularHTTP';
+  allUsers!:User[]
+
   private userObj:User =  {
     'id': 1,  //** server should assign **
     'name': 'Lord Voldemort',
@@ -35,13 +37,33 @@ export class AppComponent implements OnInit {
   constructor(private varUserService:UserService){}
 
   ngOnInit(): void {
-    this.onGetText();
+    // this.onGetText();
     // this.onDelete(3);
     // this.onUpdateUserField()
     // this.onUpdateUserObj()
     // this.onGetUsers()
-    // this.onGetUserObj()
+    this.onGetUserObj()
     // this.onCreateUserObj()
+  }
+  //get methods
+  onGetUserObj() {
+    this.varUserService.getUserObj(4000).subscribe({
+      next(var_response){ console.log(var_response);
+      },     //next - process data sent by observable
+      error(err) { console.log(err) },                    //error - handling error sent to observable.
+      complete() { console.log('Done getting ')}         //fxn run on completion
+    });
+  }
+
+  onGetUsers() {
+    this.varUserService.getUsers().subscribe({
+      next:(var_response) => {
+        this.allUsers = var_response;
+        console.log("allUsers:-->", this.allUsers)
+      },
+      error(err) { console.log(err) },                    //error - handling error sent to observable.
+      complete() { console.log('Done getting ');}         //fxn run on completion
+    });
   }
 
   //get text method
@@ -88,20 +110,6 @@ export class AppComponent implements OnInit {
     });
   }
 
-  //get methods
-  onGetUserObj() {
-    this.varUserService.getUserObj(4).subscribe({
-      next(var_response){ console.log(var_response); },     //next - process data sent by observable
-      error(err) { console.log(err) },                    //error - handling error sent to observable.
-      complete() { console.log('Done getting ')}         //fxn run on completion
-    });
-  }
 
-  onGetUsers() {
-    this.varUserService.getUsers().subscribe({
-      next(var_response){ console.log(var_response); },     //next - process data sent by observable
-      error(err) { console.log(err) },                    //error - handling error sent to observable.
-      complete() { console.log('Done getting ')}         //fxn run on completion
-    });
-  }
+
 }
