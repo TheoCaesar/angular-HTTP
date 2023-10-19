@@ -41,13 +41,13 @@ export class AppComponent implements OnInit {
     // this.onDelete(3);
     // this.onUpdateUserField()
     // this.onUpdateUserObj()
-    // this.onGetUsers()
-    this.onGetUserObj()
+    this.onGetUsers()
+    // this.onGetUserObj()
     // this.onCreateUserObj()
   }
   //get methods
   onGetUserObj() {
-    this.varUserService.getUserObj(4000).subscribe({
+    this.varUserService.getUserObj(4).subscribe({
       next(var_response){ console.log(var_response);
       },     //next - process data sent by observable
       error(err) { console.log(err) },                    //error - handling error sent to observable.
