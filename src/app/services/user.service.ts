@@ -24,7 +24,7 @@ export class UserService {
   }
 
   getUsers():Observable<User[]> {
-    return this.varHttp.get<User[]>(environment.varApiURL + 'sdofwew').pipe(
+    return this.varHttp.get<User[]>(environment.varApiURL).pipe(
         map(varUsers => varUsers.map(eachUser => ({
             ...eachUser, //spread operator - copy content of each user
             name: eachUser.name.toUpperCase(),
